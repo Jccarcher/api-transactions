@@ -1,0 +1,3 @@
+com\mendel\rest\controllers\ActuatorController.class
+com\mendel\rest\controllers\TransactionsController.class
+com\mendel\rest\RestApplication.class
