@@ -61,11 +61,21 @@
  mvn clean test
  ```
 
- ## Ejecución
+ ## Ejecución a traves de la consola
  ```bash
  cd api-transactions
  mvn spring-boot:run
- ```
+
+ ## Ejecucuin a traves del docker
+ ```bash
+docker build -t api-transactions . 
+docker run -p 8080:8080 api-transactions
+En su defecto: 
+docker run -d --name api-transactions-container -p 8080:8080 api-transactions
+
+ ## Ejecucuin a traves del docker compose:
+ ```bash
+ docker-compose up --build
 
  La aplicación corre en `http://localhost:8080`.
 

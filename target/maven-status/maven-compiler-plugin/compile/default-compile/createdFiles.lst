@@ -1,6 +1,9 @@
-com\mendel\rest\controllers\ActuatorController.class
+com\mendel\rest\dtos\SumResponse.class
 com\mendel\rest\services\TransactionServices.class
+com\mendel\rest\exeptions\TransactionAlreadyExistsException.class
 com\mendel\rest\controllers\TransactionsController.class
-com\mendel\rest\repository\TransactionRepository.class
 com\mendel\rest\RestApplication.class
+com\mendel\rest\dtos\TypeCountResponse.class
 com\mendel\rest\models\TransactionModel.class
+com\mendel\rest\controllers\ActuatorController.class
+com\mendel\rest\repository\TransactionRepository.class

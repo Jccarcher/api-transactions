@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  api-transactions:
+    build: .
+    container_name: api-transactions-container-compose
+    ports:
+      - "8080:8080"
+    volumes:
+      # Monta una carpeta local para persistir la base H2 en disco
+      - ./data:/app/data
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/app/data/mendeldb
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_H2_CONSOLE_ENABLED: "true"
+      SPRING_H2_CONSOLE_PATH: /h2-mendel
