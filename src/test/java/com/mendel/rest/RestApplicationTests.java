@@ -38,15 +38,6 @@ class RestApplicationTests {
 	}
 
 	@Test
-	void testActuatorHealthEndpointAvailable() {
-		System.out.println("\n✓ Spring Boot Actuator Health Endpoint Configuration:");
-		System.out.println("   - Endpoint: GET http://localhost:8080/actuator/health");
-		System.out.println("   - Response: JSON with status field");
-		System.out.println("   - Status Code: 200 OK");
-		System.out.println("   - Configuration: management.endpoints.web.exposure.include=health");
-	}
-
-	@Test
 	void testH2ConsoleConfiguration() {
 		System.out.println("\n✓ H2 Database Console Configuration:");
 		System.out.println("   - Enabled: Yes");

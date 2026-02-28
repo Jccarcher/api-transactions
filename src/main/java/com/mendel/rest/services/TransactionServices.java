@@ -5,6 +5,8 @@ import com.mendel.rest.repository.TransactionRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +20,24 @@ import com.mendel.rest.models.TransactionModel;
 @Service
 public class TransactionServices {
 
+    private static final Logger log = LoggerFactory.getLogger(TransactionServices.class);
+
     @Autowired
     private TransactionRepository transactionRepository;
 
     public TransactionModel createTransaction(TransactionModel transaction) {
+        log.info("Created transaction with id: {}", transaction.getTransaction_id());
         return transactionRepository.save(transaction);
     }
     
     public List<TransactionModel> getAllTransactions() {
+        log.info("Retrieving all transactions");
         return transactionRepository.findAll();
     }
 
     public TransactionModel getTransactionById(Long id) {
         Optional<TransactionModel> transactionOpt = transactionRepository.findById(id);
+        log.info("Retrieved transaction with id: {}", id);
         return transactionOpt.get();
     }
 
@@ -42,10 +49,12 @@ public class TransactionServices {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
                 "No transactions found with parent_id: " + parentId);
         }
+        log.info("Found {} transactions with parent_id: {}", transactions.size(), parentId);
         return transactions;
     }
 
     public List<TransactionModel> getTransactionsByType(String type) {
+        log.info("Retrieving transactions of type: {}", type);
         return transactionRepository.findAll().stream()
                 .filter(t -> type.equals(t.getType()))
                 .collect(Collectors.toList());
@@ -62,6 +71,7 @@ public class TransactionServices {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
                 "No transactions found with type: " + type);
         }
+        log.info("Found {} transactions of type: {}", count, type);
         return count;
     }
 
@@ -70,12 +80,20 @@ public class TransactionServices {
         if (transactionOpt.isPresent()) {
             TransactionModel transaction = transactionOpt.get();
             Double sum = transaction.getAmount();
-            List<TransactionModel> childTransactions = getTransactionsByParentId(transactionId);
+            List<TransactionModel> childTransactions;
+            try {
+                childTransactions = getTransactionsByParentId(transactionId);
+            } catch (ResponseStatusException ex) {
+                // no children found, treat as leaf
+                childTransactions = List.of();
+            }
             for (TransactionModel child : childTransactions) {
                 sum += getSumByTransactionId(child.getTransaction_id());
             }
+            log.info("Sum for transaction {} is {}", transaction.getTransaction_id(), sum);
             return sum;
         } else {
+            log.warn("Transaction with id {} not found", transactionId);
             return 0.0;
         }
     }
@@ -88,6 +106,7 @@ public class TransactionServices {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
                 "No transactions found with parent_id: " + parentId);
         }
+        log.info("Found {} transactions with parent_id: {}", transactions.size(), parentId);
         return transactions.stream()
                 .mapToDouble(TransactionModel::getAmount)
                 .sum();
@@ -113,6 +132,7 @@ public class TransactionServices {
             throw new TransactionAlreadyExistsException(id);
         }
         transaction.setTransaction_id(id);
+        log.info("Created transaction with id: {}", transaction.getTransaction_id());
         return transactionRepository.save(transaction);
     }
 

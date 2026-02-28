@@ -2,6 +2,7 @@ com\mendel\rest\dtos\SumResponse.class
 com\mendel\rest\services\TransactionServices.class
 com\mendel\rest\exeptions\TransactionAlreadyExistsException.class
 com\mendel\rest\controllers\TransactionsController.class
+com\mendel\rest\config\OpenApiConfig.class
 com\mendel\rest\RestApplication.class
 com\mendel\rest\dtos\TypeCountResponse.class
 com\mendel\rest\models\TransactionModel.class
