@@ -1,0 +1,8 @@
+2026-02-27 22:03:18.882415-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "TRANSACTIONS_ID" no encontrada
+Table "TRANSACTIONS_ID" not found; SQL statement:
+SELECT * FROM TRANSACTIONS_ID [42102-240]
+2026-02-27 22:03:42.159457-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "TRUNCATE [*]* FROM TRANSACTIONS"; se esperaba "TABLE"
+Syntax error in SQL statement "TRUNCATE [*]* FROM TRANSACTIONS"; expected "TABLE"; SQL statement:
+TRUNCATE * FROM TRANSACTIONS [42001-240]
