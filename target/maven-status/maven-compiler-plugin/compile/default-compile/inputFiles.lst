@@ -1,5 +1,8 @@
 D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\controllers\ActuatorController.java
 D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\controllers\TransactionsController.java
+D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\dtos\SumResponse.java
+D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\dtos\TypeCountResponse.java
+D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\exeptions\TransactionAlreadyExistsException.java
 D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\models\TransactionModel.java
 D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\repository\TransactionRepository.java
 D:\Julio Colina\Documentos\Programacion\Mendel-Challenge\api-transactions\src\main\java\com\mendel\rest\RestApplication.java
