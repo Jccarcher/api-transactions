@@ -50,8 +50,21 @@
  curl http://localhost:8080/actuator/health
  ```
 
- ## Configuración de la base de datos
- Se utiliza H2 en memoria. La consola está disponible en `http://localhost:8080/h2-mendel` con usuario `sa` y sin contraseña. Los datos se recrean en cada arranque (DDL `create-drop`).
+ ## OpenAPI / Swagger
+
+Al ejecutar la aplicación se genera documentación interactiva de la API.
+Accede a:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+El spec JSON live se expone en `/v3/api-docs`.
+
+Ademas en la Ruta local src\main\resources\postman se encuentra la collection para pruebas en postman o cualquier otra app.
+
+## Configuración de la base de datos
+ Se utiliza H2 en memoria. La consola está disponible en `http://localhost:8080/h2-mendel` con usuario `sa Los datos se recrean en cada arranque (DDL `create-drop`).
 
  ## Tests
  El proyecto contiene una suite de tests que carga el contexto y muestra ejemplos de requests.

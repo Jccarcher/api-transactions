@@ -14,17 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @RestController
 @RequestMapping("/transactions")
 public class TransactionsController {
+
+    private static final Logger log = LoggerFactory.getLogger(TransactionsController.class);
 
     @Autowired
     private TransactionServices transactionServices;
@@ -36,17 +37,21 @@ public class TransactionsController {
      */
     @GetMapping("/all-transactions")
     public ResponseEntity<List<TransactionModel>> getAllTransactions() {
+        log.info("GET /transactions/all-transactions called");
         List<TransactionModel> transactions = transactionServices.getAllTransactions();
         if (transactions.isEmpty()) {
+            log.info("no transactions found, throwing NOT_FOUND");
             throw new org.springframework.web.server.ResponseStatusException(
                 org.springframework.http.HttpStatus.NOT_FOUND, 
                 "No transactions found");
         }
+        log.info("returning {} transactions", transactions.size());
         return ResponseEntity.ok(transactions);
     }
 
     @GetMapping("/all-types")
     public String getAlltypes() {
+        log.info("GET /transactions/all-types called");
         return new String();
     }
 
@@ -61,10 +66,13 @@ public class TransactionsController {
     public ResponseEntity<?> createTransaction(
             @PathVariable Long transaction_id,
             @RequestBody TransactionModel transaction) {
+        log.info("PUT /transactions/{} called with body {}", transaction_id, transaction);
         try {
             TransactionModel saved = transactionServices.saveWithId(transaction_id, transaction);
+            log.info("transaction {} saved/updated", transaction_id);
             return ResponseEntity.status(HttpStatus.CREATED).body(saved);
         } catch (com.mendel.rest.exeptions.TransactionAlreadyExistsException ex) {
+            log.error("transaction {} already exists", transaction_id);
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         }
     }
@@ -76,7 +84,9 @@ public class TransactionsController {
      */
     @GetMapping("/{parent_id}")
     public ResponseEntity<List<TransactionModel>> getAlltransactionsByParentId(@PathVariable Long parent_id) {
+        log.info("GET /transactions/{} called", parent_id);
         List<TransactionModel> transactions = transactionServices.getTransactionsByParentId(parent_id);
+        log.info("found {} child transactions for parent {}", transactions.size(), parent_id);
         return ResponseEntity.ok(transactions);
     }
             /**
@@ -87,7 +97,10 @@ public class TransactionsController {
      */
     @GetMapping("/sum/{transaction_id}")
     public ResponseEntity<SumResponse> getSumByTransactionId(@PathVariable Long transaction_id) {
-        Double sum = transactionServices.getSumByParentId(transaction_id);
+        log.info("GET /transactions/sum/{} called", transaction_id);
+        // use the recursive service method that includes the transaction itself
+        Double sum = transactionServices.getSumByTransactionId(transaction_id);
+        log.info("sum for {} = {}", transaction_id, sum);
         return ResponseEntity.ok(new SumResponse(sum));
     }
     
@@ -99,7 +112,9 @@ public class TransactionsController {
      */
     @GetMapping("/types/{type}")
     public ResponseEntity<TypeCountResponse> getByType(@PathVariable String type) {
+        log.info("GET /transactions/types/{} called", type);
         Long count = transactionServices.countByType(type);
+        log.info("{} transactions of type {}", count, type);
         return ResponseEntity.ok(new TypeCountResponse(type, count));
     }
 }

@@ -1,0 +1,130 @@
+{
+  "info": {
+    "_postman_id": "97a4b94a-02aa-4672-aef8-813521d78d46",
+    "name": "Mendel",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "4791929"
+  },
+  "item": [
+    {
+      "name": "api-transactions",
+      "item": [
+        {
+          "name": "Insert-transaction",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"parent_id\":\"1\",\r\n    \"type\": \"cart\",\r\n    \"amount\": 2000.00 \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/transactions/insert",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "transactions",
+                "insert"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-transactionsByType",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/transactions/types/cart",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "transactions",
+                "types",
+                "cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-all-transactions",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/transactions/all-transactions",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "transactions",
+                "all-transactions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-transactionsByParentId",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/transactions/2",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "transactions",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-sumByTransactionsId",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/transactions/sum/2",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "transactions",
+                "sum",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
