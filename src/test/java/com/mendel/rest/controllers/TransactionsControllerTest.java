@@ -98,8 +98,8 @@ class TransactionsControllerTest {
 
             // Assert
             assertNotNull(result, "Result should not be null");
-            assertEquals("cart", result.getType());
-            assertTrue(result.getCount() > 0);
+            assertEquals("cart", result.type());
+            assertTrue(result.count() > 0);
         }
 
         @Test
@@ -113,7 +113,7 @@ class TransactionsControllerTest {
             assertNotNull(result, "Result should not be null");
             // since we created a parent amount 1000 and a child amount 200,
             // the recursive sum should equal 1200
-            assertEquals(1200.0, result.getSum(), 0.01, "Sum should correctly include parent and children");
+            assertEquals(1200.0, result.sum(), 0.01, "Sum should correctly include parent and children");
         }
     }
 }
